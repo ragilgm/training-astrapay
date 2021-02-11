@@ -38,7 +38,7 @@ public class User implements Serializable {
 //	   $                 # end-of-string
 
 	@NotBlank(message = "password is required")
-	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{8,20}$", flags = Flag.UNICODE_CASE)
+//	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*])(?=\\S+$).{8,20}$", flags = Flag.UNICODE_CASE)
 	private String password;
 	private boolean deletable = true;
 	private String created_at;

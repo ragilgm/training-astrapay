@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.configuration.MyUserDetailServices;
+import com.example.demo.configuration.SecurityUtility;
 import com.example.demo.dto.AuthenticationRequest;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
@@ -45,9 +46,9 @@ public class UserController {
 		return userServices.findAll();
 	}
 	
-	@PostMapping(value = "/users")
+	@PostMapping(value = "/registration")
 	public ResponseEntity<?> addUser(@Valid @RequestBody User user){
-		
+		user.setPassword(SecurityUtility.passwordEncoder().encode(user.getPassword()));
 		user.setCreated_at(CustomDateFormat.dateNowString());
 		user.setUpdated_at(null);
 		
@@ -56,6 +57,8 @@ public class UserController {
 	
 	@PostMapping(value = "/authentication")
 	public ResponseEntity<?> loginUser(@Valid @RequestBody AuthenticationRequest user) throws Exception{
+		
+		
 		
 		try {
 			authenticationManager.authenticate(
